@@ -1,0 +1,44 @@
+[colors.primary]
+
+background = "#26292c"
+
+[cursor]
+#style = "Block"
+style = "Beam"
+#style = "Underline"
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 15
+
+[font.normal]
+#family = "JetBrainsMono Nerd Font Mono"
+
+[scrolling]
+history = 10000
+multiplier = 6
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[window]
+decorations = "Full"
+dynamic_padding = false
+#opacity = 1
+startup_mode = "Windowed"
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.dimensions]
+columns = 160
+lines = 45
+
+[window.padding]
+x = 5
+y = 0

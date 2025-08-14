@@ -1,0 +1,197 @@
+# ======================================================================================================
+# BOOT DAEMONS AND DISPLAY SETTINGS
+# ======================================================================================================
+
+exec --no-startup-id bgs -z /home/user/bgs/nepal.jpg
+#exec --no-startup-id polybar
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+exec --no-startup-id pipewire
+exec --no-startup-id setxkbmap pl
+exec --no-startup-id xrandr --output DP-2 --mode 1920x1080 --rate 99.67
+# ======================================================================================================
+# GENERAL SETTINGS
+# ======================================================================================================
+
+# Font:
+
+#font pango:monospace 8
+#font pango:DejaVu Sans Mono 8
+font pango:Cantarell Bold 10
+
+# Windows borders (colors)
+#                    BORDER: BACKGROUND: TEXT: INDICATOR:
+client.focused          #808080 #555555 #ffffff #555555
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #900000 #900000 #ffffff #900000
+client.placeholder      #FFFFFF #0c0c0c #ffffff #000000
+client.focused_inactive #808080 #555555 #ffffff #555555
+
+
+# Windows border width/size
+#for_window [floating] border pixel 1
+#for_window [tiling] border pixel 0
+#for_window [workspace="^.*"] border pixel 0
+new_window pixel 1
+for_window [floating] border pixel 1
+
+#for_window [class="alacritty"] border pixel 1
+
+# ======================================================================================================
+# KEYBINDS, ESSENTIAL
+# ======================================================================================================
+
+# VARIABLES:
+set $mod Mod1
+set $mod Mod4
+set $ws_prev "workspace_back"
+set $refresh_i3status killall -SIGUSR1 i3status
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Defines which key have to be pressed if you want to move floating window
+floating_modifier $mod
+tiling_drag modifier titlebar
+# Switch to last focused client/workspace
+bindsym Mod1+Tab workspace back_and_forth
+# Kill focused window
+bindsym Mod1+q kill
+
+# Terminal:
+bindsym $mod+Return exec alacritty
+bindsym $mod+q exec alacritty 
+
+# Rofi
+bindsym Mod1+r exec rofi -show drun
+# Execute non-sudo commands via rofi
+bindsym Mod1+t exec rofi -show run
+
+# Screenshot 
+bindsym $mod+Shift+s exec scrot -s '/home/user/Pictures/Scrot_%d-%m-%Y_%Hh_%Mm_%s.png' 
+
+
+# Change focused window (arrows)
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+# Change focused window (keyboard)
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# split in horizontal orientation
+bindsym Mod1+e split h
+# split in vertical orientation
+bindsym Mod1+c split v
+
+# enter fullscreen mode for the focused container
+bindsym Mod1+f fullscreen toggle
+
+# move focused window | You can use mouse too!
+bindsym Mod1+Left move left
+bindsym Mod1+Down move down
+bindsym Mod1+Up move up
+bindsym Mod1+Right move right
+
+# change container layout (stacked, tabbed, toggle split) | STACKING DISABLE BY DEFAULT, REASON: POINTLESS.
+#bindsym $mod+i layout stacking
+#bindsym Mod1+w layout tabbed
+bindsym Mod1+s layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+# focus the child container
+bindsym $mod+d focus child
+# switch to workspace
+
+bindsym Mod1+1 workspace number $ws1
+bindsym Mod1+2 workspace number $ws2
+bindsym Mod1+3 workspace number $ws3
+bindsym Mod1+4 workspace number $ws4
+bindsym Mod1+5 workspace number $ws5
+bindsym Mod1+6 workspace number $ws6
+bindsym Mod1+7 workspace number $ws7
+bindsym Mod1+8 workspace number $ws8
+bindsym Mod1+9 workspace number $ws9
+bindsym Mod1+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+1 move container to workspace number $ws1
+bindsym $mod+2 move container to workspace number $ws2
+bindsym $mod+3 move container to workspace number $ws3
+bindsym $mod+4 move container to workspace number $ws4
+bindsym $mod+5 move container to workspace number $ws5
+bindsym $mod+6 move container to workspace number $ws6
+bindsym $mod+7 move container to workspace number $ws7
+bindsym $mod+8 move container to workspace number $ws8
+bindsym $mod+9 move container to workspace number $ws9
+bindsym $mod+0 move container to workspace number $ws10
+
+# Focus next window
+bindsym $mod+Tab focus next
+# Focus previous window
+bindsym $mod+Shift+Tab focus prev
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you wish to leave this session?' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Enter/leave resize mod
+bindsym $mod+r mode "resize"
+# resize window (you can also use the mouse for that)
+mode "resize" {
+# These bindings trigger as soon as you enter the resize mode
+
+# Pressing left will shrink the window’s width.
+# Pressing right will grow the window’s width.
+# Pressing up will shrink the window’s height.
+# Pressing down will grow the window’s height.
+	bindsym j resize shrink width 10 px or 10 ppt
+		bindsym k resize grow height 10 px or 10 ppt
+		bindsym l resize shrink height 10 px or 10 ppt
+		bindsym semicolon resize grow width 10 px or 10 ppt
+
+# same bindings, but for the arrow keys
+		bindsym Left resize shrink width 10 px or 10 ppt
+		bindsym Down resize grow height 10 px or 10 ppt
+		bindsym Up resize shrink height 10 px or 10 ppt
+		bindsym Right resize grow width 10 px or 10 ppt
+
+# same bindings for arrows but faster
+		bindsym Shift+Left resize shrink width 50 px or 50 ppt
+		bindsym Shift+Down resize grow height 50 px or 50 ppt
+		bindsym Shift+Up resize shrink height 50 px or 50 ppt
+		bindsym Shift+Right resize grow width 50 px or 50 ppt
+
+
+# back to normal: Enter or Escape or $mod+r
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+		bindsym $mod+r mode "default"
+
+
+
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
